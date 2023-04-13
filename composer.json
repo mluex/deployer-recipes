@@ -1,0 +1,9 @@
+{
+    "name": "mluex/deployer-recipes",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2||^8.0"
+    }
+}
