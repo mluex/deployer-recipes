@@ -19,9 +19,10 @@ require 'vendor/mluex/deployer-recipes/recipe/recipe-name.php';
 
 ## Recipes
 
-| Recipe          | Docs   |
-|-----------------|--------|
-| symfony6-webapp | _TODO_ |
+| Recipe          | Docs                                                                                        |
+|-----------------|---------------------------------------------------------------------------------------------|
+| docker          | [click here](https://github.com/mluex/deployer-recipes/blob/6.x/recipe/docker.php)          |
+| symfony6-webapp | [click here](https://github.com/mluex/deployer-recipes/blob/6.x/recipe/symfony6-webapp.php) |
 
 ## License
 
