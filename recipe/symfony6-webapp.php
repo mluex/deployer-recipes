@@ -20,6 +20,24 @@ To include recipe in your deploy.php add this line:
 ```php
 require_once __DIR__ . '/vendor/mluex/deployer-recipes/recipe/symfony6-webapp.php';
 ```
+
+The recipe uses tasks from the common recipe of deployer. Please make sure that you also include this in your deploy.php:
+
+```php
+require_once __DIR__ . '/vendor/deployer/deployer/recipe/common.php';
+```
+
+The parameter build_path should point to your local project directory so that the build can be executed there locally.
+The recipe automatically uses the current working directory. To define a fixed directory, use:
+
+```php
+set('build_path', '/path/to/project');
+```
+
+Or set the value in your inventory:
+```yaml
+build_path: /path/to/project
+```
 */
 
 namespace Deployer;
@@ -32,7 +50,10 @@ set('shared_dirs', ['var/log', 'var/sessions']);
 set('shared_files', ['.env.local.php', '.env.local']);
 set('writable_dirs', ['var/cache', 'var/log', 'var/sessions']);
 set('migrations_config', '');
-set('build_path', '/'); # TODO
+
+set('build_path', function () {
+    return getcwd();
+});
 
 set('bin/yarn', function () {
     return locateBinaryPath('yarn');
