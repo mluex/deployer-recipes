@@ -104,11 +104,9 @@ set('docker/bin/php', 'php');
 set('bin/php', 'docker exec {{docker_options}} {{docker_php_container_name}} {{docker/bin/php}}');
 
 set('composer_phar_url', 'https://getcomposer.org/download/latest-stable/composer.phar');
-set('host/bin/composer.phar', '{{deploy_path}}/bin/composer.phar');
+set('host/bin', '{{deploy_path}}/bin');
+set('host/bin/composer.phar', '{{host/bin}}/composer.phar');
 set('docker/bin/composer.phar', '{{docker_deploy_path}}/bin/composer.phar');
-set('composer_phar_host_dir', function() {
-    return dirname(parse('host/bin/composer.phar'));
-});
 set('bin/composer', '{{bin/php}} {{docker/bin/composer.phar}} -d {{docker_release_path}}');
 
 task('deploy:docker:shutdown', function() {
@@ -128,7 +126,7 @@ task('deploy:docker:boot', function() {
 
 // Download Composer to be available in Docker env
 task('deploy:composer:download', function() {
-    run('mkdir -p {{composer_phar_host_dir}}');
+    run('mkdir -p {{host/bin}}');
     run('rm -f {{host/bin/composer.phar}}');
     run('curl -o {{host/bin/composer.phar}} {{composer_phar_url}}');
     run('chmod +x {{host/bin/composer.phar}}');
